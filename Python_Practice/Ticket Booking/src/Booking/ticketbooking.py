@@ -54,6 +54,13 @@ class BusTicket:
                 bus_number (str): bus_number
                 seat_number (init): seat_number
          """
+            
+            self.ticket_id = ticket_id
+            self.passenger_name = passenger_name
+            self.journey_date = journey_date
+            self.bus_number = bus_number
+            self.seat_number = seat_number
+            
         def display_ticket_info(self):
             """carrying soft copy or digitally
 
