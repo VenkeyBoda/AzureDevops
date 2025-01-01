@@ -1,3 +1,6 @@
+"""this is the fibonacci method
+"""
+
 ##Fibonacci
 
 first_number = 1
