@@ -1,0 +1,28 @@
+# Ignore Python cache files
+__pycache__
+*.pyc
+*.pyo
+
+# Ignore virtual environment directories
+.venv
+venv
+
+# Ignore distribution and build files
+dist
+build
+
+# Ignore version control directories and files
+.git
+.gitignore
+
+# Ignore IDE configuration files
+.vscode
+
+# Ignore environment variable files
+.env
+
+# Ignore coverage reports
+coverage
+
+# Ignore other unnecessary files
+.DS_Store  # macOS specific
