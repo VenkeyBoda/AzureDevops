@@ -1,12 +1,13 @@
 FROM python:3.11-alpine AS build
 # Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# ENV PYTHONDONTWRITEBYTECODE 1
+# ENV PYTHONUNBUFFERED 1
+COPY . /apps
 WORKDIR /apps
 # COPY requirements.txt .
 RUN pip pip install -r requirements.txt
 
-FROM python:3.11-alpine AS RUN
+FROM python:3.11-alpine AS run
 LABEL org="lti" author="venkat"
 ARG USERNAME=venkat
 RUN adduser -D -h /apps -s /bin/bash ${USERNAME}
