@@ -51,7 +51,7 @@
         - create work done file
     - name: copy the service file
       ansible.builtin.copy:
-        src: files/tomcat.service.j2
+        src: files/tomcat.service
         dest: /etc/systemd/system/tomcat.service
       notify:
         - restart tomcat
