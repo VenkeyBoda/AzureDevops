@@ -46,7 +46,7 @@
       ansible.builtin.file:
         path: "{{ item.path }}"
         mode: '0753'
-      loop: "{{ script_files.templates }}"
+      loop: "{{ script_files.files }}"
       notify:
         - create work done file
     - name: copy the service file
