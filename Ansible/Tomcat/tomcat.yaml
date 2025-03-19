@@ -4,7 +4,7 @@
   become: yes
   tasks:
     - name: update packages and install java
-      ansible.builtin.apt:
+      ansible.builtin.package:
         name: "{{ java_package_name }}"
         update_cache: yes
         state: present 
@@ -51,8 +51,30 @@
         - create work done file
     - name: copy the service file
       ansible.builtin.copy:
-        src: files/tomcat.service
+        src: templates/tomcat.service.j2
         dest: /etc/systemd/system/tomcat.service
+      notify:
+        - restart tomcat
+    - name: create tomcat admin user for management
+      ansible.builtin.template:
+        src: templates/tomcat-users.j2
+        dest: "{{ tomcat_homedir }}/conf/tomcat-users.xml"
+        owner: "{{ tomcat_username }}"
+        group: "{{ tomcat_groupname }}"
+      notify:
+        - restart tomcat
+    - name: allow access for manager app
+      ansible.builtin.template:
+        src: templates/context.j2
+        dest: "{{ tomcat_homedir }}/webapps/manager/META-INF/context.xml"
+        owner: "{{ tomcat_username }}"
+        group: "{{ tomcat_groupname }}"
+      notify:
+        - restart tomcat
+    - name: allow access for host manager
+      ansible.builtin.template:
+        src: templates/context.j2
+        dest: "{{ tomcat_homedir }}/webapps/host-manager/META-INF/context.xml"
       notify:
         - restart tomcat
     - name: ensure tomcat is enabled and started
